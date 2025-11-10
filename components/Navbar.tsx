@@ -3,11 +3,12 @@ import React from 'react'
 import Menu from './Menu'
 import Link from 'next/link'
 import Image from 'next/image'
+import CartIcon from './CartIcon';
 
 const Navbar = () => {
   const user = false;
   return (
-    <div className='h-12 text-orange-500 flex items-center justify-between p-4 border-b-2 border-b-orange-300 uppercase md:h-24'>
+    <div className='h-12 text-orange-500 flex items-center justify-between p-4 border-b-2 border-b-orange-300 uppercase md:h-20 lg:px-20 xl:px-40'>
       <div className='hidden md:flex gap-4 flex-1'>
           <Link href="/" className='text-l'>Homepage</Link>
           <Link href="/menu" className='text-l'>Menu</Link>
@@ -20,7 +21,7 @@ const Navbar = () => {
           <Menu/>
       </div>
       <div className='hidden md:flex gap-4 items-center justify-end flex-1' >
-        <div className='md:absolute top-3 r-2 lg:static flex items-center gap-2 cursor-pointer bg-amber-300 px-1 rounded-2xl'>
+        <div className='md:absolute top-3 r-2 lg:static flex items-center gap-2 cursor-pointer bg-amber-400 px-3 rounded-xl p-1'>
           <Image  src="/phone.png" alt='' width={20} height={20}/>
           <span>123 456 789</span>
         </div>
@@ -31,6 +32,7 @@ const Navbar = () => {
               <Link href="/orders">Orders</Link>
             )
           }
+          <CartIcon/>
       </div>
     </div>
   )
