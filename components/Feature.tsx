@@ -1,10 +1,20 @@
-"use client";
-
-import { featuredProducts } from "@/data";
 import Image from "next/image";
 import React from "react";
+import  {ProductType} from "@/types/types";
 
-const Feature = () => {
+const getData = async () =>{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product`, {
+    cache:"no-store"    // không lưu cache, mỗi lần gọi đều lấy dữ liệu mới. force-cache: ngược lại . 
+  });
+  if(!res.ok){
+    throw new Error("Failed to fetch data");
+  }
+  return res.json()
+}
+
+const Feature = async () => {
+  const featuredProducts:ProductType[] = await getData();
+
   return (
     <div
       className="w-screen overflow-x-scroll text-orange-500 scroll-smooth snap-x snap-mandatory"
@@ -13,7 +23,7 @@ const Feature = () => {
       {/* WRAPPER */}
       <div className="w-max flex flex-row">
         {/* SINGLE ITEM */}
-        {featuredProducts.map((item) => (
+        {featuredProducts.map((item:ProductType) => (
           <div
             key={item.id}
             className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-orange-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh] snap-center"
